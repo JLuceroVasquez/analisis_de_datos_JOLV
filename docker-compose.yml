@@ -1,0 +1,16 @@
+# Señalamos los services (contenedores) que estará en el contedor "mysql"
+# al ejecutar el docker-compose observamos que el contenedor se nombró como "analisis_de_datos_jolv-mysql-1" siendo 1 la numeración automática que le asigna el terminal.
+services: 
+  mysql:
+    # Construye el contendor mysql empleando la imagen ejecutada según las instrucciones del dockerfile ubicado en la carpeta mysql
+    build: ./mysql/
+    # Define las variables de entorno. La primera define la clave de la conexión root, y la segunda crea una BD.
+    environment: 
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=retail_db
+    # Con el puerto 3310 de mi máquina (local) accedo al puerto 3306 del contenedor.
+    ports:
+      - '3310:3306'
+    # En las máquinas, los volumenes son espacios separados en el disco. En windows son el C: y D:. En el contexto de contenedores, estamos indicando que todo lo añadido en la carpeta data se replique dentro del contedor mysql.
+    volumes:
+      - ./mysql/data:/mysql/data
