@@ -1,5 +1,6 @@
-# Utilizamos la última versión de la imagen "mysql". Imagen que ya es existente en DockerHub
 FROM mysql:latest
-# Declaramos variables de entorno
-ENV MYSQL_ROOT_PASSWORD=root
 WORKDIR /mysql/data
+ENV MYSQL_ROOT_PASSWORD=root
+COPY data_warehouse_netflix.sql /docker-entrypoint-initdb.d/
+COPY db_movies_neflix_transact.sql /docker-entrypoint-initdb.d/
+COPY retail_db.sql /docker-entrypoint-initdb.d/
